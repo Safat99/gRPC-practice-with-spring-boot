@@ -12,5 +12,5 @@ message PaymentResponse {
 }
 
 service PaymentService {
-    rpc ProcessPayment(PaymentRequest) returns (PaymentResponse);
+    rpc processPayment(PaymentRequest) returns (PaymentResponse);
 }

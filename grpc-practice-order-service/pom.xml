@@ -34,9 +34,6 @@
 			<version>2.15.0.RELEASE</version>
 		</dependency>
 
-
-
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
