@@ -1,8 +1,9 @@
 package com.safatPay.grpcpracticeorderservice.service;
 
-import com.example.orderService.OrderOuterClass.Order;
-import com.example.orderService.OrderOuterClass.OrderResponse;
-import com.example.orderService.OrderServiceGrpc;
+import com.example.paymentService.Payment.PaymentRequest;
+import com.example.paymentService.Payment.PaymentResponse;
+import com.example.paymentService.PaymentServiceGrpc;
+import com.safatPay.grpcpracticeorderservice.payload.request.PaymentRequestDto;
 import io.grpc.StatusRuntimeException;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,25 @@ import org.springframework.stereotype.Service;
 public class OrderService {
 
     @GrpcClient("grpc-payment-service")
-    private OrderServiceGrpc.OrderServiceBlockingStub orderServiceStub;
+    private PaymentServiceGrpc.PaymentServiceBlockingStub paymentServiceBlockingStub;
 
-    public OrderResponse placeOrder(Order order) {
+    public void startPayment(PaymentRequestDto request) {
         try {
-            return orderServiceStub.placeOrder(order);
+
+            PaymentRequest paymentRequest= convertToProtobuf(request);
+
+            PaymentResponse response = paymentServiceBlockingStub.processPayment(paymentRequest);
+            String status = response.getStatus();
+            System.out.println("order status: " + status);
+
         } catch (StatusRuntimeException e) {
-            throw new RuntimeException("Error placing order", e);
+            throw new RuntimeException("Error start connecting with Payment Service", e);
         }
+    }
+    private PaymentRequest convertToProtobuf(PaymentRequestDto paymentRequestDto) {
+        return PaymentRequest.newBuilder()
+                .setOrderId(paymentRequestDto.getOrderId())
+                .setAmount(paymentRequestDto.getAmount())
+                .build();
     }
 }
