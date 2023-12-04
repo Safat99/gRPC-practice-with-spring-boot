@@ -7,7 +7,7 @@ import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
-public class PaymentService extends PaymentServiceGrpc.PaymentServiceImplBase {
+public class PaymentServiceImpl extends PaymentServiceGrpc.PaymentServiceImplBase {
 
     @Override
     public void processPayment(PaymentRequest paymentRequest, StreamObserver<PaymentResponse> responseObserver){

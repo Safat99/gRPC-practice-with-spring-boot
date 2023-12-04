@@ -13,7 +13,6 @@ public class OrderService {
 
     @GrpcClient("grpc-payment-service")
     private PaymentServiceGrpc.PaymentServiceBlockingStub paymentServiceBlockingStub;
-
     public void startPayment(PaymentRequestDto request) {
         try {
 
