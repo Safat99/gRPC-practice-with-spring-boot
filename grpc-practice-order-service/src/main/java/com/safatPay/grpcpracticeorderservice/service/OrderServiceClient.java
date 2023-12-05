@@ -9,7 +9,7 @@ import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderService {
+public class OrderServiceClient {
 
     @GrpcClient("grpc-payment-service")
     private PaymentServiceGrpc.PaymentServiceBlockingStub paymentServiceBlockingStub;

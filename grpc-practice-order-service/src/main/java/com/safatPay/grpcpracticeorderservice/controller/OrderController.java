@@ -1,7 +1,7 @@
 package com.safatPay.grpcpracticeorderservice.controller;
 
 import com.safatPay.grpcpracticeorderservice.payload.request.PaymentRequestDto;
-import com.safatPay.grpcpracticeorderservice.service.OrderService;
+import com.safatPay.grpcpracticeorderservice.service.OrderServiceClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
-    private final OrderService orderService;
+    private final OrderServiceClient orderService;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderServiceClient orderService) {
         this.orderService = orderService;
     }
 
