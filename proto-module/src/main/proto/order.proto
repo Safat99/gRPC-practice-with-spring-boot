@@ -13,7 +13,18 @@ message OrderResponse {
     // Add more fields as needed
 }
 
+message OrderStatusUpdate {
+    string order_id = 1;
+    string product_name = 2;
+    string status = 3;
+}
+
+message OrderStatusRequest {
+    repeated string order_ids = 1;
+}
+
 service OrderService {
     rpc placeOrder(Order) returns (OrderResponse);
     // Add more RPC methods as needed
+    rpc StreamOrders(OrderStatusRequest) returns (stream OrderStatusUpdate);
 }
