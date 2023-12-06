@@ -13,10 +13,11 @@ public class OrderServiceClient {
 
     @GrpcClient("grpc-payment-service")
     private PaymentServiceGrpc.PaymentServiceBlockingStub paymentServiceBlockingStub;
+
     public void startPayment(PaymentRequestDto request) {
         try {
 
-            PaymentRequest paymentRequest= convertToProtobuf(request);
+            PaymentRequest paymentRequest = convertToProtobuf(request);
 
             PaymentResponse response = paymentServiceBlockingStub.processPayment(paymentRequest);
             String status = response.getStatus();
@@ -26,6 +27,7 @@ public class OrderServiceClient {
             throw new RuntimeException("Error start connecting with Payment Service", e);
         }
     }
+
     private PaymentRequest convertToProtobuf(PaymentRequestDto paymentRequestDto) {
         return PaymentRequest.newBuilder()
                 .setOrderId(paymentRequestDto.getOrderId())
